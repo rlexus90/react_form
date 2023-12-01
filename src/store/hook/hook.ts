@@ -3,11 +3,15 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 import type { TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from '../store';
 import { formData } from '../slices/formData';
+import { countrySlice } from '../slices/countrySlice';
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const useActions = () => {
   const dispatch = useAppDispatch();
-  return bindActionCreators({ ...formData.actions }, dispatch);
+  return bindActionCreators(
+    { ...formData.actions, ...countrySlice.actions },
+    dispatch
+  );
 };

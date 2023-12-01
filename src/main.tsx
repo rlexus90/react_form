@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import './index.css';
+import './index.scss';
 import { Provider } from 'react-redux';
 import { setupStore } from './store/store.ts';
+import { COUNTRIES } from './common/countries.ts';
+import App from './App.tsx';
 
-const store = setupStore();
+const store = setupStore({ countrySlice: { countries: COUNTRIES } });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

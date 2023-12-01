@@ -1,0 +1,15 @@
+import { createBrowserRouter } from 'react-router-dom';
+import { Main } from '../../pages/Main/Main';
+import { Form1 } from '../../pages/Form1/Form1';
+import { Form2 } from '../../pages/Form2/Form2';
+import { Page404 } from '../../pages/Page404/Page404';
+
+export const router = createBrowserRouter([
+  { path: '/', element: <Main /> },
+  { path: '/form1', element: <Form1 /> },
+  { path: '/form2', element: <Form2 /> },
+  {
+    path: '*',
+    element: <Page404 />,
+  },
+]);
