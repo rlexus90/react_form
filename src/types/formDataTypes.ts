@@ -10,7 +10,7 @@ export interface IFormData {
   country: string | FileList;
 }
 
-type Gender = 'Male' | 'Female' | `Somsing else`;
+export type Gender = 'Male' | 'Female' | `Somsing else`;
 
 export interface IFormDataError {
   name: string;

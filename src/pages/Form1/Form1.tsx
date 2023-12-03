@@ -1,63 +1,19 @@
 import { FC } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
 import { IFormData } from '../../types/formDataTypes';
 import './Form.scss';
 import { useActions, useAppSelector } from '../../store/hook/hook';
 import { convertImage } from '../../utils/convertImage';
-import { Autocomplete } from '../../components/Autocomplete/Autocomplete';
-import * as yup from 'yup';
+import { AutocompleteWhithRef } from '../../components/Autocomplete/Autocomplete';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { setupSchema } from '../../utils/setupSchema';
 
 export const Form1: FC = () => {
   const { countries } = useAppSelector((store) => store.countrySlice);
+  const navigate = useNavigate();
 
-  const schema = yup.object().shape({
-    name: yup.string().min(2, 'To short').required('Input name'),
-    age: yup.number().positive().integer().required('Input age'),
-    email: yup.string().email().required('Input email'),
-    pasword1: yup
-      .string()
-      .matches(/[A-Z]/, 'Password must have 1 uppercase letter')
-      .matches(/[a-z]/, 'Password must have 1 lowercase letter')
-      .matches(/\d/, 'Password must have 1 digit')
-      .matches(
-        /[!@#$%^&*]/,
-        'Password must have 1 special character (!@#$%^&*)'
-      )
-      .min(8)
-      .required('Input password'),
-    pasword2: yup
-      .string()
-      .oneOf([yup.ref('pasword1')], 'Passwords must match')
-      .required('Input password'),
-    gender: yup
-      .string()
-      .oneOf(['Male', 'Female', `Somsing else`], 'Chose gender')
-      .required(),
-    acceptT_C: yup.boolean().equals([true], 'Confirm form send').required(),
-    country: yup
-      .string()
-      .oneOf(countries, 'Not Should this country')
-      .required('Input country'),
-    picture: yup
-      .mixed<FileList>()
-      .required('Load image')
-      .test('type', 'You mast load image', (value: FileList) => {
-        if (!value.length) return false;
-        if (
-          value[0].type === 'image/jpeg' ||
-          value[0].type === 'image/jpg' ||
-          value[0].type === 'image/png'
-        )
-          return true;
-        return false;
-      })
-      .test(
-        'size',
-        'Too large',
-        (value) => !value.length || value[0].size < 1024 * 1024
-      ),
-  });
+  const schema = setupSchema(countries);
 
   const {
     register,
@@ -65,7 +21,7 @@ export const Form1: FC = () => {
     reset,
     formState: { errors },
   } = useForm<IFormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as unknown as Resolver<IFormData, unknown>,
     mode: 'all',
   });
   const { setFirstFormData } = useActions();
@@ -76,7 +32,10 @@ export const Form1: FC = () => {
     data.picture = await convertImage(file);
     setFirstFormData(data);
     reset();
+    navigate('/main');
   };
+
+  const { ref } = register('country');
 
   return (
     <>
@@ -139,10 +98,11 @@ export const Form1: FC = () => {
                 <></>
               )}
             </div>
-            <Autocomplete
+            <AutocompleteWhithRef
               register={register('country')}
               data={countries}
               label="Country"
+              ref={ref}
             />
             {errors.country ? (
               <p className="error-mesage">{errors.country.message}</p>
