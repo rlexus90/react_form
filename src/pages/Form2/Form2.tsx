@@ -1,23 +1,38 @@
-import { FC } from 'react';
+import { FC, FormEvent, useRef } from 'react';
 import { Autocomplete } from '../../components/Autocomplete/Autocomplete';
 import '../Form1/Form.scss';
 import { useAppSelector } from '../../store/hook/hook';
 
 export const Form2: FC = () => {
   const { countries } = useAppSelector((store) => store.countrySlice);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const ageRef = useRef<HTMLInputElement>(null);
+  // const emailRef = useRef<HTMLInputElement>(null);
+  // const pasword1Ref = useRef<HTMLInputElement>(null);
+  // const pasword2Ref = useRef<HTMLInputElement>(null);
+  // const genderRef = useRef<HTMLInputElement>(null);
+  // const acceptT_CRef = useRef<HTMLInputElement>(null);
+  // const pictureRef = useRef<HTMLInputElement>(null);
+  // const countryRef = useRef<HTMLInputElement>(null);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e);
+    console.log(nameRef.current?.value);
+  };
 
   return (
     <>
       <main>
         <div className="wrapper">
           <h1>It`s similar form</h1>
-          <form className="form">
+          <form className="form" onSubmit={onSubmit}>
             <div className="group">
-              <input type="text" id="Name" required />
+              <input type="text" id="Name" required ref={nameRef} />
               <label htmlFor="Name">Name</label>
             </div>
             <div className="group">
-              <input type="text" id="Age" required />
+              <input type="text" id="Age" required ref={ageRef} />
               <label htmlFor="Age">Age</label>
             </div>
             <div className="group">

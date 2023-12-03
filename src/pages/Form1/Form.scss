@@ -47,6 +47,11 @@ input {
       color: $secondary-color;
     }
   }
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px $main-color inset;
+    -webkit-text-fill-color: white !important;
+    // border-bottom-color: rgba(white, .5);
+  }
 }
 
 ::selection {

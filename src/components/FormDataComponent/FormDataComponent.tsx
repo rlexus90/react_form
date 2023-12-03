@@ -40,7 +40,7 @@ export const FormDataComponent: FC<{ data: IFormData; isFirst: boolean }> = ({
           </p>
           <p>
             <span>Country: </span>
-            {data.country}
+            {typeof data.country === 'string' ? data.country : ''}
           </p>
           <img src={data.picture} alt="Your Picture" className="form-picture" />
         </div>
