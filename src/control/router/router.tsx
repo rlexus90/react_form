@@ -3,11 +3,18 @@ import { Main } from '../../pages/Main/Main';
 import { Form1 } from '../../pages/Form1/Form1';
 import { Form2 } from '../../pages/Form2/Form2';
 import { Page404 } from '../../pages/Page404/Page404';
+import App from '../../App';
 
 export const router = createBrowserRouter([
-  { path: '/', element: <Main /> },
-  { path: '/form1', element: <Form1 /> },
-  { path: '/form2', element: <Form2 /> },
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      { path: 'main', element: <Main /> },
+      { path: 'form1', element: <Form1 /> },
+      { path: 'form2', element: <Form2 /> },
+    ],
+  },
   {
     path: '*',
     element: <Page404 />,

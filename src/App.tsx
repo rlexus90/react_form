@@ -1,12 +1,15 @@
-import { RouterProvider } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Header } from './components/Header/Header';
-import { router } from './control/router/router';
+import { ErrorBoundary } from 'react-error-boundary';
+import { FallBack } from './components/FallBack/FallBack';
 
 function App() {
   return (
     <>
       <Header />
-      <RouterProvider router={router} />
+      <ErrorBoundary fallbackRender={FallBack}>
+        <Outlet />
+      </ErrorBoundary>
     </>
   );
 }

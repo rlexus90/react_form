@@ -1,1 +1,18 @@
 @import './assets/nullstyle';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 20px;
+  text-align: center;
+  font-size: 2rem;
+}
