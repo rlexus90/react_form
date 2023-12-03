@@ -1,8 +1,11 @@
 import { FC } from 'react';
 import { Autocomplete } from '../../components/Autocomplete/Autocomplete';
 import '../Form1/Form.scss';
+import { useAppSelector } from '../../store/hook/hook';
 
 export const Form2: FC = () => {
+  const { countries } = useAppSelector((store) => store.countrySlice);
+
   return (
     <>
       <main>
@@ -10,30 +13,26 @@ export const Form2: FC = () => {
           <h1>It`s similar form</h1>
           <form className="form">
             <div className="group">
-              <input type="text" id="Name" />
+              <input type="text" id="Name" required />
               <label htmlFor="Name">Name</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="text" id="Age" />
+              <input type="text" id="Age" required />
               <label htmlFor="Age">Age</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="email" id="Email" />
+              <input type="email" id="Email" required />
               <label htmlFor="Email">Email</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="password" id="Password1" />
+              <input type="password" id="Password1" required />
               <label htmlFor="Password1">Password</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="password" id="Password2" />
+              <input type="password" id="Password2" required />
               <label htmlFor="Password2">Password</label>
-              <div className="bar"></div>
             </div>
+            <Autocomplete data={countries} label="Country" required />
             <select defaultValue={'?'}>
               <option value="?" disabled>
                 Gender
@@ -57,7 +56,6 @@ export const Form2: FC = () => {
                 accept=".png, .jpeg, .jpg"
               />
             </div>
-            <Autocomplete data={[]} />
             <input type="submit" value={'Comfirm form'} />
           </form>
         </div>

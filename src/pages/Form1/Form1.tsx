@@ -2,13 +2,14 @@ import { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IFormData } from '../../types/formDataTypes';
 import './Form.scss';
-import { useActions } from '../../store/hook/hook';
+import { useActions, useAppSelector } from '../../store/hook/hook';
 import { convertImage } from '../../utils/convertImage';
 import { Autocomplete } from '../../components/Autocomplete/Autocomplete';
 
 export const Form1: FC = () => {
   const { register, handleSubmit } = useForm<IFormData>();
   const { setFirstFormData } = useActions();
+  const { countries } = useAppSelector((store) => store.countrySlice);
 
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
     console.log(data);
@@ -25,30 +26,41 @@ export const Form1: FC = () => {
           <h1>This is form create with React Hook Form </h1>
           <form onSubmit={handleSubmit(onSubmit)} className="form">
             <div className="group">
-              <input type="text" id="Name" {...register('name')} />
+              <input type="text" id="Name" required {...register('name')} />
               <label htmlFor="Name">Name</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="text" id="Age" {...register('age')} />
+              <input type="text" id="Age" required {...register('age')} />
               <label htmlFor="Age">Age</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="email" id="Email" {...register('email')} />
+              <input type="email" id="Email" required {...register('email')} />
               <label htmlFor="Email">Email</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="password" id="Password1" {...register('pasword1')} />
+              <input
+                type="password"
+                id="Password1"
+                required
+                {...register('pasword1')}
+              />
               <label htmlFor="Password1">Password</label>
-              <div className="bar"></div>
             </div>
             <div className="group">
-              <input type="password" id="Password2" {...register('pasword2')} />
+              <input
+                type="password"
+                id="Password2"
+                required
+                {...register('pasword2')}
+              />
               <label htmlFor="Password2">Password</label>
-              <div className="bar"></div>
             </div>
+            <Autocomplete
+              register={register('country')}
+              data={countries}
+              label="Country"
+              required
+            />
             <select defaultValue={'?'} {...register('gender')}>
               <option value="?" disabled>
                 Gender
@@ -78,7 +90,6 @@ export const Form1: FC = () => {
                 {...register('picture')}
               />
             </div>
-            <Autocomplete register={register('country')} data={[]} />
             <input type="submit" value={'Comfirm form'} />
           </form>
         </div>
