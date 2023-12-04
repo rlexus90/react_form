@@ -22,7 +22,7 @@ input {
   width: $width;
   padding-top: calc($width/15);
   border: none;
-  border-radius: 0; // For iOS
+  border-radius: 0;
   border-bottom: solid calc($width/150) rgba(white, 0.5);
   color: white;
   background: $main-color;
@@ -33,7 +33,6 @@ input {
     ~ label {
       top: 0;
       font-size: calc($width/25);
-      // font: 700 $width/25 Roboto;
       color: rgba(white, 0.5);
     }
   }
@@ -43,14 +42,12 @@ input {
     ~ label {
       top: 0;
       font-size: calc($width/25);
-      // font: 700 $width/25 Roboto;
       color: $secondary-color;
     }
   }
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px $main-color inset;
     -webkit-text-fill-color: white !important;
-    // border-bottom-color: rgba(white, .5);
   }
 }
 
@@ -63,9 +60,7 @@ select {
   margin: 0 auto;
   width: $width;
   height: 40px;
-  // padding: 0 10px;
   font-size: inherit;
-  // border: 1px solid black;
   font-weight: 100;
   font-size: calc($width/15);
   color: rgba(white, 0.5);
@@ -90,8 +85,6 @@ select {
         left: 40px;
         font-size: calc($width/15);
         width: $width;
-        // font-size: calc($width/25);
-        // font: 700 $width/25 Roboto;
         color: rgba(white, 0.5);
       }
     }
@@ -100,7 +93,6 @@ select {
 
 .form {
   background-color: $form-color;
-  // width: $width * 1.5;
   margin: 0 auto;
   padding-bottom: 40px;
 }
@@ -134,7 +126,6 @@ select {
 
 .error-mesage {
   margin: 5px auto 0;
-  // padding-left: 40px;
   color: $error-message-color;
   width: calc($width * 1);
 }
@@ -146,7 +137,6 @@ select {
   background-color: rgb(59, 59, 61);
   border-radius: 20px;
   border: solid calc($width/150) rgba(white, 0.5);
-  // color: blue;
   &:valid {
     border-bottom-color: rgba(white, 0.5);
   }

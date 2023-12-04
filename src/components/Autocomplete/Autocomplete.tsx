@@ -6,7 +6,6 @@ interface IAutocomplete {
   register?: UseFormRegisterReturn;
   data: string[];
   label: string;
-  // ref: MutableRefObject<HTMLInputElement>|null;
 }
 
 export const AutocompleteWhithRef = forwardRef<HTMLInputElement, IAutocomplete>(

@@ -47,7 +47,6 @@ export const Form2: FC = () => {
 
       const file = data.picture[0] as unknown as File;
       data.picture = await convertImage(file);
-      console.log(data);
       setSecondFormData(data);
       navigate('/main');
     } catch (e) {
