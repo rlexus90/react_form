@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 
 export const setupSchema = (countries: string[]) => {
-  return yup.object().shape({
-    name: yup.string().min(2, 'To short').required('Input name'),
+  return yup.object({
+    name: yup.string().min(2, 'Name to short').required('Input name'),
     age: yup.number().positive().integer().required('Input age'),
-    email: yup.string().email().required('Input email'),
+    email: yup.string().email('Not valid email').required('Input email'),
     pasword1: yup
       .string()
       .matches(/[A-Z]/, 'Password must have 1 uppercase letter')
@@ -44,7 +44,7 @@ export const setupSchema = (countries: string[]) => {
       })
       .test(
         'size',
-        'Too large',
+        'Image to large',
         (value) => !value.length || value[0].size < 1024 * 1024
       ),
   });

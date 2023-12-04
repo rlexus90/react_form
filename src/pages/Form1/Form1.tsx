@@ -145,7 +145,7 @@ export const Form1: FC = () => {
                 {...register('picture')}
               />
               <label htmlFor="picture" className="pic-label">
-                Plese load picture
+                Please load picture
               </label>
               {errors.picture ? (
                 <p className="error-mesage">{errors.picture.message}</p>

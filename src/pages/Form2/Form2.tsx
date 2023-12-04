@@ -1,4 +1,4 @@
-import { FC, FormEvent, useRef } from 'react';
+import { FC, FormEvent, useRef, useState } from 'react';
 import { AutocompleteWhithRef } from '../../components/Autocomplete/Autocomplete';
 import '../Form1/Form.scss';
 import { useActions, useAppSelector } from '../../store/hook/hook';
@@ -6,11 +6,13 @@ import { setupSchema } from '../../utils/setupSchema';
 import { convertImage } from '../../utils/convertImage';
 import { useNavigate } from 'react-router-dom';
 import { IFormData } from '../../types/formDataTypes';
+import { ValidationError } from 'yup';
 
 export const Form2: FC = () => {
   const { countries } = useAppSelector((store) => store.countrySlice);
   const navigate = useNavigate();
   const { setSecondFormData } = useActions();
+  const [errorMsg, setErrorMsg] = useState<string[]>();
 
   const schema = setupSchema(countries);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -26,23 +28,36 @@ export const Form2: FC = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const data = (await schema.validate({
-      name: nameRef.current?.value,
-      age: ageRef.current?.value,
-      email: emailRef.current?.value,
-      pasword1: pasword1Ref.current?.value,
-      pasword2: pasword2Ref.current?.value,
-      gender: genderRef.current?.value,
-      acceptT_C: acceptT_CRef.current?.checked,
-      country: countryRef.current?.value,
-      picture: pictureRef.current?.files,
-    })) as unknown as IFormData;
+    try {
+      const data = (await schema.validate(
+        {
+          name: nameRef.current?.value,
+          age: ageRef.current?.value,
+          email: emailRef.current?.value,
+          pasword1: pasword1Ref.current?.value,
+          pasword2: pasword2Ref.current?.value,
+          gender: genderRef.current?.value,
+          acceptT_C: acceptT_CRef.current?.checked,
+          country: countryRef.current?.value,
+          picture: pictureRef.current?.files,
+        },
+        { abortEarly: false }
+      )) as unknown as IFormData;
+      setErrorMsg([]);
 
-    if (!data.picture.length) return;
-    const file = data.picture[0] as unknown as File;
-    data.picture = await convertImage(file);
-    setSecondFormData(data);
-    navigate('/main');
+      const file = data.picture[0] as unknown as File;
+      data.picture = await convertImage(file);
+      console.log(data);
+      setSecondFormData(data);
+      navigate('/main');
+    } catch (e) {
+      if (e instanceof ValidationError) {
+        setErrorMsg(e.errors);
+      } else {
+        setErrorMsg(['Unknown Error - look in console']);
+        console.error(e);
+      }
+    }
   };
 
   return (
@@ -104,9 +119,6 @@ export const Form2: FC = () => {
               <label htmlFor="T_C">I agree send form</label>
             </div>
             <div className="group">
-              <label htmlFor="picture" className="pic-label">
-                Plese load picture
-              </label>
               <input
                 className="pic-input"
                 type="file"
@@ -114,7 +126,16 @@ export const Form2: FC = () => {
                 accept=".png, .jpeg, .jpg"
                 ref={pictureRef}
               />
+              <label htmlFor="picture" className="pic-label">
+                Please load picture
+              </label>
             </div>
+            {errorMsg?.length &&
+              errorMsg.map((msg) => (
+                <p className="error-msg" key={msg}>
+                  {msg}
+                </p>
+              ))}
             <input type="submit" value={'Comfirm form'} />
           </form>
         </div>
