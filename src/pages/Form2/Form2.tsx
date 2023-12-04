@@ -101,15 +101,17 @@ export const Form2: FC = () => {
               label="Country"
               ref={countryRef}
             />
-            <select defaultValue={'?'} ref={genderRef}>
-              <option value="?" disabled>
-                Gender
-              </option>
-              <option value={`Somsing else`}>Somsing else</option>
-              <option value={`Male`}>Male</option>
-              <option value={`Female`}>Female</option>
-            </select>
             <div className="group">
+              <select defaultValue={'?'} ref={genderRef}>
+                <option value="?" disabled>
+                  Gender
+                </option>
+                <option value={`Somsing else`}>Somsing else</option>
+                <option value={`Male`}>Male</option>
+                <option value={`Female`}>Female</option>
+              </select>
+            </div>
+            <div className="group checkbox">
               <input
                 type="checkbox"
                 id="T_C"
@@ -136,7 +138,7 @@ export const Form2: FC = () => {
                   {msg}
                 </p>
               ))}
-            <input type="submit" value={'Comfirm form'} />
+            <input type="submit" className="submit" value={'Comfirm form'} />
           </form>
         </div>
       </main>

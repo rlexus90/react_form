@@ -78,12 +78,12 @@ export const Form1: FC = () => {
                 {...register('pasword1')}
               />
               <label htmlFor="Password1">Password</label>
-              {errors.pasword1 ? (
-                <p className="error-mesage">{errors.pasword1.message}</p>
-              ) : (
-                <></>
-              )}
             </div>
+            {errors.pasword1 ? (
+              <p className="error-mesage">{errors.pasword1.message}</p>
+            ) : (
+              <></>
+            )}
             <div className="group">
               <input
                 type="password"
@@ -92,12 +92,12 @@ export const Form1: FC = () => {
                 {...register('pasword2')}
               />
               <label htmlFor="Password2">Password</label>
-              {errors.pasword2 ? (
-                <p className="error-mesage">{errors.pasword2.message}</p>
-              ) : (
-                <></>
-              )}
             </div>
+            {errors.pasword2 ? (
+              <p className="error-mesage">{errors.pasword2.message}</p>
+            ) : (
+              <></>
+            )}
             <AutocompleteWhithRef
               register={register('country')}
               data={countries}
@@ -109,20 +109,22 @@ export const Form1: FC = () => {
             ) : (
               <></>
             )}
-            <select defaultValue={'?'} {...register('gender')}>
-              <option value="?" disabled>
-                Gender
-              </option>
-              <option value={`Somsing else`}>Somsing else</option>
-              <option value={`Male`}>Male</option>
-              <option value={`Female`}>Female</option>
-            </select>
+            <div className="group">
+              <select defaultValue={'?'} {...register('gender')}>
+                <option value="?" disabled>
+                  Gender
+                </option>
+                <option value={`Somsing else`}>Somsing else</option>
+                <option value={`Male`}>Male</option>
+                <option value={`Female`}>Female</option>
+              </select>
+            </div>
             {errors.gender ? (
               <p className="error-mesage">{errors.gender.message}</p>
             ) : (
               <></>
             )}
-            <div className="group">
+            <div className="group checkbox">
               <input
                 type="checkbox"
                 id="T_C"
@@ -130,12 +132,12 @@ export const Form1: FC = () => {
                 {...register('acceptT_C')}
               />
               <label htmlFor="T_C">I agree send form</label>
-              {errors.acceptT_C ? (
-                <p className="error-mesage">{errors.acceptT_C.message}</p>
-              ) : (
-                <></>
-              )}
             </div>
+            {errors.acceptT_C ? (
+              <p className="error-mesage">{errors.acceptT_C.message}</p>
+            ) : (
+              <></>
+            )}
             <div className="group">
               <input
                 className="pic-input"
@@ -147,13 +149,13 @@ export const Form1: FC = () => {
               <label htmlFor="picture" className="pic-label">
                 Please load picture
               </label>
-              {errors.picture ? (
-                <p className="error-mesage">{errors.picture.message}</p>
-              ) : (
-                <></>
-              )}
             </div>
-            <input type="submit" value={'Comfirm form'} />
+            {errors.picture ? (
+              <p className="error-mesage">{errors.picture.message}</p>
+            ) : (
+              <></>
+            )}
+            <input type="submit" className="submit" value={'Comfirm form'} />
           </form>
         </div>
       </main>

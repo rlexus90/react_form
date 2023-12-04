@@ -13,36 +13,47 @@ export const FormDataComponent: FC<{ data: IFormData; isFirst: boolean }> = ({
     data.pasword1 &&
     data.gender &&
     data.country &&
-    data.picture
+    data.picture &&
+    data.acceptT_C
   )
     return (
       <>
         <div className={isFirst ? 'new' : ''}>
-          <p>
-            <span>Name: </span>
-            {data.name}
-          </p>
-          <p>
-            <span>Age: </span>
-            {data.age}
-          </p>
-          <p>
-            <span>Email: </span>
-            {data.email}
-          </p>
-          <p>
-            <span>Password: </span>
-            {data.pasword1}
-          </p>
-          <p>
-            <span>Gender: </span>
-            {data.gender}
-          </p>
-          <p>
-            <span>Country: </span>
-            {typeof data.country === 'string' ? data.country : ''}
-          </p>
-          <img src={data.picture} alt="Your Picture" className="form-picture" />
+          <div className="wrapp">
+            <p>
+              <span>Name: </span>
+              {data.name}
+            </p>
+            <p>
+              <span>Age: </span>
+              {data.age}
+            </p>
+            <p>
+              <span>Email: </span>
+              {data.email}
+            </p>
+            <p>
+              <span>Password: </span>
+              {data.pasword1}
+            </p>
+            <p>
+              <span>Gender: </span>
+              {data.gender}
+            </p>
+            <p>
+              <span>Country: </span>
+              {typeof data.country === 'string' ? data.country : ''}
+            </p>
+            <p>
+              <span>Accept form rule: </span>
+              {typeof data.acceptT_C === 'boolean' ? `${data.acceptT_C}` : ''}
+            </p>
+            <img
+              src={data.picture}
+              alt="Your Picture"
+              className="form-picture"
+            />
+          </div>
         </div>
       </>
     );
