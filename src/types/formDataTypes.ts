@@ -7,7 +7,19 @@ export interface IFormData {
   gender: Gender;
   acceptT_C: boolean;
   picture: string;
-  country: string;
+  country: string | FileList;
 }
 
-type Gender = 'Male' | 'Female' | `Somsing else`;
+export type Gender = 'Male' | 'Female' | `Somsing else`;
+
+export interface IFormDataError {
+  name: string;
+  age: string;
+  email: string;
+  pasword1: string;
+  pasword2: string;
+  gender: string;
+  acceptT_C: string;
+  picture: string;
+  country: string;
+}

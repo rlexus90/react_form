@@ -1,0 +1,27 @@
+@import '../../common/var.scss';
+
+.new {
+  border: 3px solid $color-text;
+  border-radius: 5px;
+}
+
+.wrapp {
+  max-width: 400px;
+  padding: 10px;
+
+  img {
+    display: block;
+    margin-top: 5px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  p {
+    line-height: 1.3;
+  }
+
+  span {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}

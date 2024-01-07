@@ -1,0 +1,33 @@
+@import '../../common/var.scss';
+
+.autocomplete.group {
+  overflow: initial;
+
+  ul {
+    display: block;
+    max-height: 250px;
+    width: $width;
+    position: absolute;
+    z-index: 10;
+    overflow: scroll;
+
+    padding: 10px 0;
+    color: white;
+    background: $main-color;
+    font-size: calc($width/15);
+    border: solid calc($width/150) $secondary-color;
+  }
+
+  li {
+    padding: 7px 15px;
+  }
+
+  li > label {
+    display: block;
+    position: static;
+    cursor: pointer;
+  }
+  li > label:hover {
+    color: $secondary-color;
+  }
+}

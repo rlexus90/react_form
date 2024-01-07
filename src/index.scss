@@ -12,7 +12,12 @@
 }
 
 h1 {
-  margin: 20px;
+  padding: 20px;
   text-align: center;
   font-size: 2rem;
+  color: rgba(white, 0.5);
+}
+
+main {
+  min-height: 100vh;
 }

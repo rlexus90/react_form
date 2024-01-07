@@ -1,0 +1,16 @@
+@import '../../common/var.scss';
+
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  color: $color-text;
+}
+
+h2 {
+  margin: 30px auto;
+  font-size: 2rem;
+  width: fit-content;
+  color: rgb(62, 62, 62);
+}

@@ -6,14 +6,9 @@ import { setupStore } from './store/store.ts';
 import { COUNTRIES } from './common/countries.ts';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './control/router/router.tsx';
-import { firstState } from './common/firstState.ts';
 
 const store = setupStore({
   countrySlice: { countries: COUNTRIES },
-  formData: {
-    firstForm: [firstState],
-    secondForm: [firstState],
-  },
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
